@@ -1,0 +1,52 @@
+[
+ {
+  "name": "massage",
+  "id": 1,
+  "cost": 90
+ },
+ {
+  "name": "meeting",
+  "id": 2,
+  "cost": 12
+ },
+ {
+  "name": "massage",
+  "id": 3,
+  "cost": 90
+ },
+ {
+  "name": "meeting",
+  "id": 4,
+  "cost": 12
+ },
+ {
+  "name": "massage",
+  "id": 5,
+  "cost": 90
+ },
+ {
+  "name": "meeting",
+  "id": 6,
+  "cost": 12
+ },
+ {
+  "name": "massage",
+  "id": 7,
+  "cost": 90
+ },
+ {
+  "name": "meeting",
+  "id": 8,
+  "cost": 12
+ },
+ {
+  "name": "massage",
+  "id": 9,
+  "cost": 90
+ },
+ {
+  "name": "meeting",
+  "id": 10,
+  "cost": 12
+ }
+]

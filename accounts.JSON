@@ -1,0 +1,90 @@
+[
+ {
+  "id": 1,
+  "name": "Bob",
+  "phone": "555-555-5555",
+  "address": "123 Sesame St.",
+  "username": "Bobs",
+  "password": "passw0rd",
+  "type": "member",
+  "additional": [
+   {
+    "status: ": "active"
+   },
+   {
+    "services: ": []
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "name": "Bobbie",
+  "phone": "555-555-5555",
+  "address": "123 Sesame St.",
+  "username": "Bobbies",
+  "password": "passw0rd",
+  "type": "provider",
+  "additional": [
+   {
+    "services: ": []
+   },
+   {
+    "offered: ": [
+     1,
+     2,
+     3,
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "name": "Hank",
+  "phone": "555-555-5555",
+  "address": "123 Sesame St.",
+  "username": "Hanks",
+  "password": "passw0rd",
+  "type": "admin",
+  "additional": []
+ },
+ {
+  "id": 4,
+  "name": "fourth",
+  "phone": "555-555-5555",
+  "address": "123 Sesame St.",
+  "username": "Bobbies",
+  "password": "passw0rd",
+  "type": "provider",
+  "additional": [
+   {
+    "services: ": []
+   },
+   {
+    "offered: ": [
+     1,
+     2,
+     3,
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "name": "1123",
+  "phone": "123",
+  "address": "123",
+  "username": "1123",
+  "password": "123",
+  "type": "member",
+  "additional": [
+   {
+    "status: ": "active"
+   },
+   {
+    "services: ": []
+   }
+  ]
+ }
+]

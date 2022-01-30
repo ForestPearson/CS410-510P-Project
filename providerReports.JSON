@@ -1,0 +1,41 @@
+[
+ {
+  "provider name": "Bobbie",
+  "provider id": 1,
+  "services": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "date": "12/31",
+  "cost": 360,
+  "report id": 4
+ },
+ {
+  "provider name": "Bobbie",
+  "provider id": 4,
+  "services": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "date": "12/31",
+  "cost": 360,
+  "report id": 6
+ },
+ {
+  "provider name": "Bobbie",
+  "provider id": 2,
+  "services": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "date": "12/31",
+  "cost": 360,
+  "report id": 7
+ }
+]
