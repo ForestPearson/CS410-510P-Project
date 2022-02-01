@@ -1,3 +1,7 @@
+# Account Management allos for creation of new JSON objects in accounts.JSON
+# Allows for New account creation, Updating account information, Deletion
+# Search by ID and Username
+
 import json
 
 class accountManager:
@@ -129,6 +133,7 @@ class accountManager:
         
         return 1
 
+    # Search account by ID Number
     def getAccountById(self, id):
 
         # attempt to read in accounts from the database
@@ -155,8 +160,10 @@ class accountManager:
             print("There are no accounts in the database!")
             return -1
 
+        #This checks each JSON entry as a list.
         for entry in data:
-            if entry["username"] == username:
+            #Converts JSON entry to lowercase, Converts Username input to lowercase.
+            if entry["username"].lower() == username.lower():
                 return entry
         
         return -1
