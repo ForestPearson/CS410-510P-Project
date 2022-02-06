@@ -5,9 +5,6 @@
 from login_handler import *
 from report_generation_handler import *
 
-# Used to generate ID
-import time
-
 class adminHandler:
   
   
@@ -105,8 +102,8 @@ class adminHandler:
       status = ""
       offered = ""
       
-      # Get account info 
-      #acct[0] = time.time() % 1000             # ID internal to ensure no dups 
+      # Generate account with inputed information
+      # ID genertated in account_magement by makeAccount() 
       name = input("Enter the name: ")
       phone = ""
       while not phone.isnumeric(): 
