@@ -5,7 +5,7 @@
 from login_handler import *
 from report_generation_handler import *
 
-# To generate ID
+# Used to generate ID
 import time
 
 class adminHandler:
@@ -123,7 +123,6 @@ class adminHandler:
         except: 
           print("error accessing db to create account")
           return -1
-      return 1
       if type == "provider":
         offered = input("Services Offered: ").split()
         try : acctmgr.makeAccount(name=name, phone=phone, address=address, username=username, password=password, type=type, services=offered, offered="")
