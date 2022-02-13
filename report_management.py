@@ -2,6 +2,7 @@ import json
 
 class reportManager:
 
+    # Create member report with passed in data from controller.
     def makeMemberReport(self, member, provider, service, date):
 
         # Required fields for member report:
@@ -17,20 +18,21 @@ class reportManager:
 
         data = []
 
-        # Attempts to read in JSON from the database
-        # this is so that we can append the new entry to the end of the JSON
+        # Attempts to read in JSON from the database so that we can append the new entry to the end of the JSON.
         try:
             with open('memberReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
 
-        # Assign a report id
+        # Assign ID to this report.
         if data:
             id = (data[len(data)-1]["report id"] + 1)
         else:
             id = 1
 
+        # Creates a new report with specific arguments passed in from report_generation_handler.py.
+        # Pulls data from proper database based on the variable types.
         newReport = {
             "member name"    :   member["name"],
             "member id"      :   member["id"],
@@ -43,16 +45,19 @@ class reportManager:
             "report id"      :   id 
         }
 
+        # Add the new report into the database of memberReports.JSON.
         data.append(newReport)
 
+        # Method dump() will convert Python objects into JSON objects.
         with open('memberReports.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
 
         return 1
 
 
-    # Only allows one report saved per provider at any time. Most recent added report
-    # from a given provider is the one that's saved.
+    # Create provider report with passed in data from controller.
+    # Only allows one report saved per provider at any time.
+    # Most recent added report from a given provider is the one that's saved.
     def makeProviderReport(self, provider, reports, date, cost):
         
         # Required fields for member report:
@@ -64,19 +69,21 @@ class reportManager:
 
         data = []
 
-        # Attempts to read in JSON from the database
-        # this is so that we can append the new entry to the end of the JSON
+        # Attempts to read in JSON from the database so that we can append the new entry to the end of the JSON.
         try:
             with open('providerReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
         
+        # Assign ID to this report.
         if data: 
             id = (data[len(data)-1]["report id"] + 1)
         else:
             id = 1
 
+        # Creates a new report with specific arguments passed in from report_generation_handler.py.
+        # Pulls data from proper database based on the variable types.
         newReport = {
             "provider name"     :   provider["name"],
             "provider id"       :   provider["id"],
@@ -86,27 +93,27 @@ class reportManager:
             "report id"         :   id
         }
 
-        # Check for previous provider report from the same provider
+        # Check for previous provider report from the same provider.
         for entry in data:
 
             if entry["provider id"] == newReport["provider id"]:
 
-                # Remove previous report                    
+                # Remove previous report.                 
                 self.delProviderReports(self, reportId=entry["report id"])
                 data = self.getProviderReports(self)
 
-                # Check for empty file
+                # Check for empty file.
                 if data == -1:
                     data = []
                 break
-        
+
+        # Add the new report into the database of providerReports.JSON.
         data.append(newReport)
-        
         with open('providerReports.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
         return 1
     
-
+    # Create payable report with passed in data from controller.
     def makePayableReport(self, date, repIds, cost):
         
         # Required fields for payable report:
@@ -118,19 +125,21 @@ class reportManager:
 
         data = []
 
-        # Attempts to read in JSON from the database
-        # this is so that we can append the new entry to the end of the JSON
+        # Attempts to read in JSON from the database so that we can append the new entry to the end of the JSON.
         try:
             with open('payableReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
-        
+
+        # Assign ID to this report.  
         if data:
             id = data[len(data)-1]["report id"] + 1
         else:
             id = 1
 
+        # Creates a new report with specific arguments passed in from report_generation_handler.py.
+        # Pulls data from proper database based on the variable types.
         newReport = {
             "date"              :   date,
             "report id"         :   id,
@@ -138,14 +147,14 @@ class reportManager:
             "cost"              :   cost
         }
 
+        # Add the new report into the database of payableReports.JSON.
         data.append(newReport)
-        
         with open('payableReports.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
         return 1
 
 
-    # Add service passed in from controller
+    # Add service passed in from controller.
     def addService(self, serviceName, cost):
         
         # Required fields for service:
@@ -156,35 +165,36 @@ class reportManager:
 
         data = []
 
-        # Attempts to read in JSON from the database
-        # this is so that we can append the new entry to the end of the JSON
+        # Attempts to read in JSON from the database so that we can append the new entry to the end of the JSON.
         try:
             with open('services.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
 
-        # Assign id
+        # Assign ID to this report.
         if data:
             id = data[len(data)-1]["id"] + 1
         else:
             id = 1
 
+        # Creates a new report with specific arguments passed in from report_generation_handler.py.
+        # Pulls data from proper database based on the variable types.
         newService = {
             "name"      :   serviceName,
             "id"        :   id,
             "cost"      :   cost
         }
 
+
+        # Add the new report into the database of services.JSON.
         data.append(newService)
-        
         with open('services.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
         return 1
 
 
-    # Pull services from database
-    # Pulls all services if no service code is provided
+    # Pull services from services.JSON database.
     def getService(self, serviceCode=0):
         data = []
     
@@ -194,9 +204,11 @@ class reportManager:
         except:
             return -1
 
+        # Pulls all services if no service code is provided.
         if serviceCode == 0:
             return data
         
+        # Pulls specific service provided service code.
         for entry in data:
             if entry["id"] == serviceCode:
                 return entry
@@ -204,21 +216,24 @@ class reportManager:
         return 0
     
 
-    # Delete services indicated by service code
-    # 4 possible return states: 
-    # -2 if no services saved, -1 if all services deleted (default)
-    #  0 if no match found with serviceCode, 1 if match found 
+    # Delete services indicated by service code.
+    # Four possible return states:
+    # Found match: 1
+    # No found match: 0
+    # All services deleted: -1
+    # No saved services: -2
     def delService(self, serviceCode=0):
 
         data = []
 
+        # Return -2 if no services exist.
         try:
             with open('services.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -2
 
-        # Default service code of -1 indicates delete all
+        # Return -1 for all services being deleted.
         if serviceCode == 0:
             open('services.JSON', 'w').close()
             return -1
@@ -226,30 +241,30 @@ class reportManager:
         new = []
         flag = 0 
 
-        # Copy all elements into new object, excluding deleted ones
+        # Copy all elements into new object, excluding deleted ones.
+        # flag = 1 return found match with the provided service code.
         for entry in data:
             if entry["id"] == serviceCode:
                 flag = 1
             else:
                 new.append(entry)
         
-        # Write new object to file
+        # Write updated data to file.
         if len(new) > 0:
             with open('services.JSON', 'w') as outfile:
                 json.dump(data, outfile, indent=1)
                 
-        # Prevents writing an empty array into the file
+        # Prevents writing an empty array into the file.
         else:
             open('services.JSON', 'w').close()
 
         return flag
     
     
-    # Pull member reports from database and return as json object
+    # Pull member reports from database and return as json object.
     def getMemberReports(self):
 
         data = []
-
         try:
             with open('memberReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
@@ -259,19 +274,25 @@ class reportManager:
         return data
 
 
-    # Delete all member reports associated with passed in memberID or reportId.
-    # Delete all reports by default
+    # Delete member reports associated with the passed in member ID or report ID.
+    # Delete all reports by default.
+    # Four possible return states:
+    # Found match: 1
+    # No found match: 0
+    # All member reports deleted: -1
+    # No saved member reports: -2
     def delMemberReports(self, memberId=0, reportId=0):
 
         data = []
 
+        # Return -2 if no member reports exist.
         try: 
             with open('memberReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -2
         
-        # Default option, delete all reports 
+        # Return -1 for deleting all member reports.
         if memberId == 0 and reportId == 0:
             open('memberReports.JSON', 'w').close()
             return -1
@@ -279,30 +300,29 @@ class reportManager:
         new = []
         flag = 0
 
-        # Copy all elements into new object, excluding deleted ones
+        # Copy all elements into new object, excluding deleted ones.
         for entry in data:
             if entry["member id"] == memberId and entry["report id"] == reportId:
                 flag = 1
             else:
                  new.append(entry)
         
-        # Write new data back to file
+        # Write updated data back to file.
         if len(new) > 0:
             with open('memberReports.JSON', 'w') as outfile:
                 json.dump(new, outfile, indent=1)
 
-        # Prevent writing an empty array into the file
+        # Prevent writing an empty array into the file.
         else:
             open('memberReports.JSON', 'w').close()
 
         return flag
 
 
-    # Pull provider reports from database and return as json object
+    # Pull provider reports from database and return as json object.
     def getProviderReports(self):
 
         data = []
-
         try:
             with open('providerReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
@@ -312,16 +332,25 @@ class reportManager:
         return data
     
 
+    # Delete provider reports associated with the passed in provider ID or report ID.
+    # Delete all reports by default.
+    # Four possible return states:
+    # Found match: 1
+    # No found match: 0
+    # All provider reports deleted: -1
+    # No saved provider reports: -2
     def delProviderReports(self, providerId=0, reportId=0):
 
         data = []
 
+        # Return -2 if no provider reports exist.
         try:
             with open('providerReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -2
-        
+
+        # Return -1 for deleting all provider reports.  
         if providerId == 0 and reportId == 0:
             open('providerReports.JSON', 'w').close()
             return -1
@@ -329,25 +358,29 @@ class reportManager:
         new = []
         flag = 0
 
+        # Copy all elements into new object, excluding deleted ones.
         for entry in data:
             if entry["provider id"] == providerId or entry["report id"] == reportId:
                 flag = 1
             else:
                 new.append(entry)
 
+        # Write updated data back to file.
         if len(new) > 0:
             with open('providerReports.JSON', 'w') as outfile:
                 json.dump(new, outfile, indent=1)
+        
+        # Prevent writing an empty array into the file.
         else:
             open('providerReports.JSON', 'w').close()
 
         return flag
 
 
+    # Pull payable reports from database and return as json object.
     def getPayableReports(self):
 
         data = []
-
         try:
             with open('payableReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
@@ -357,16 +390,25 @@ class reportManager:
         return data
 
 
+    # Delete provider reports associated with the passed in report ID.
+    # Delete all reports by default.
+    # Four possible return states:
+    # Found match: 1
+    # No found match: 0
+    # All member reports deleted: -1
+    # No saved member reports: -2
     def delPayableReports(self, reportId=0):
 
         data = []
 
+        # Return -2 if no payable reports exist.
         try:
             with open('payableReports.JSON') as readfile:
                 data = json.load(readfile)
         except:
             return -2
 
+        # Return -1 for deleting all payable reports.  
         if reportId == 0:
             open('payableReports.JSON', 'w').close()
             return -1
@@ -374,15 +416,19 @@ class reportManager:
         new = []
         flag = 0
 
+        # Copy all elements into new object, excluding deleted ones.
         for entry in data:
             if entry["report id"] == reportId:
                 flag = 1
             else:
                 new.append(entry)
         
+        # Write updated data back to file.
         if len(new) > 0:
             with open('payableReports.JSON', 'w') as outfile:
                 json.dump(new, outfile, indent=1)
+                
+        # Prevent writing an empty array into the file.
         else:
             open('payableReports.JSON', 'w').close()
 
