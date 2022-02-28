@@ -120,7 +120,7 @@ class accountManager:
 
         # remove any account whose id matches the id we want to remove
         for entry in data:
-            if entry["id"] == id:
+            if entry['id'] == id:
                 data.remove(entry)
                 flag = 1
 
