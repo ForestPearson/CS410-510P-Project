@@ -1,7 +1,10 @@
+import sys
+sys.path.insert(1, '/src')
+from login_handler import *
 # Authentication function. Takes in a login and password.
 # See accounts.JSON for current login credentials
 
-from login_handler import *
+
 
 def auth():
     while True:

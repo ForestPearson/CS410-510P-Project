@@ -30,7 +30,7 @@ class providerHandler:
     
     def validate(self, id):
         try:
-            with open('accounts.JSON', 'r') as readfile:
+            with open('records/accounts.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass

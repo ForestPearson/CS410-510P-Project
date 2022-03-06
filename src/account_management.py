@@ -1,8 +1,8 @@
+import json 
 # Account Management allos for creation of new JSON objects in accounts.JSON
 # Allows for New account creation, Updating account information, Deletion
 # Search by ID and Username
 
-import json
 
 class accountManager:
 
@@ -31,7 +31,7 @@ class accountManager:
         # Attempts to read in JSON from the database
         # this is so that we can append the new entry to the end of the JSON
         try:
-            with open('accounts.JSON', 'r') as readfile:
+            with open("records/accounts.JSON", 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
@@ -68,7 +68,7 @@ class accountManager:
             }
 
         data.append(newAccount)
-        with open('accounts.JSON', 'w') as outfile:
+        with open('records/accounts.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
 
         return 1
@@ -80,7 +80,7 @@ class accountManager:
 
         # attempt to read in accounts from the database
         try:
-            with open('accounts.JSON', 'r') as readfile:
+            with open('records/accounts.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             print("There are no accounts in the database!")
@@ -99,7 +99,7 @@ class accountManager:
         if flag == 0:
             return -1
         
-        with open('accounts.JSON', 'w') as outfile:
+        with open('records/accounts.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
         
         return 1
@@ -128,7 +128,7 @@ class accountManager:
         if flag == 0:
             return -1
         
-        with open('accounts.JSON', 'w') as outfile:
+        with open('records/accounts.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
         
         return 1
@@ -138,7 +138,7 @@ class accountManager:
 
         # attempt to read in accounts from the database
         try:
-            with open('accounts.JSON', 'r') as readfile:
+            with open('records/accounts.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             print("There are no accounts in the database!")
@@ -154,7 +154,7 @@ class accountManager:
     def getAccountByUsername(self, username):
         # attempt to read in accounts from the database
         try:
-            with open('accounts.JSON', 'r') as readfile:
+            with open('records/accounts.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             print("There are no accounts in the database!")
