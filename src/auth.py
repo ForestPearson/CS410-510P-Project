@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(1, '/src')
 from login_handler import *
 
 def auth():

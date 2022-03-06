@@ -20,7 +20,7 @@ class reportManager:
         # Attempts to read in JSON from the database
         # this is so that we can append the new entry to the end of the JSON
         try:
-            with open('memberReports.JSON', 'r') as readfile:
+            with open('records/memberReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
@@ -45,7 +45,7 @@ class reportManager:
 
         data.append(newReport)
 
-        with open('memberReports.JSON', 'w') as outfile:
+        with open('records/memberReports.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
 
         return 1
@@ -67,7 +67,7 @@ class reportManager:
         # Attempts to read in JSON from the database
         # this is so that we can append the new entry to the end of the JSON
         try:
-            with open('providerReports.JSON', 'r') as readfile:
+            with open('records/providerReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
@@ -102,7 +102,7 @@ class reportManager:
         
         data.append(newReport)
         
-        with open('providerReports.JSON', 'w') as outfile:
+        with open('records/providerReports.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
         return 1
     
@@ -121,7 +121,7 @@ class reportManager:
         # Attempts to read in JSON from the database
         # this is so that we can append the new entry to the end of the JSON
         try:
-            with open('payableReports.JSON', 'r') as readfile:
+            with open('records/payableReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
@@ -140,7 +140,7 @@ class reportManager:
 
         data.append(newReport)
         
-        with open('payableReports.JSON', 'w') as outfile:
+        with open('records/payableReports.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
         return 1
 
@@ -159,7 +159,7 @@ class reportManager:
         # Attempts to read in JSON from the database
         # this is so that we can append the new entry to the end of the JSON
         try:
-            with open('services.JSON', 'r') as readfile:
+            with open('records/services.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             pass
@@ -178,7 +178,7 @@ class reportManager:
 
         data.append(newService)
         
-        with open('services.JSON', 'w') as outfile:
+        with open('records/services.JSON', 'w') as outfile:
             json.dump(data, outfile, indent=1)
         return 1
 
@@ -189,7 +189,7 @@ class reportManager:
         data = []
     
         try:
-            with open('services.JSON', 'r') as readfile:
+            with open('records/services.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -1
@@ -213,14 +213,14 @@ class reportManager:
         data = []
 
         try:
-            with open('services.JSON', 'r') as readfile:
+            with open('records/services.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -2
 
         # Default service code of -1 indicates delete all
         if serviceCode == 0:
-            open('services.JSON', 'w').close()
+            open('records/services.JSON', 'w').close()
             return -1
 
         new = []
@@ -235,12 +235,12 @@ class reportManager:
         
         # Write new object to file
         if len(new) > 0:
-            with open('services.JSON', 'w') as outfile:
+            with open('records/services.JSON', 'w') as outfile:
                 json.dump(data, outfile, indent=1)
                 
         # Prevents writing an empty array into the file
         else:
-            open('services.JSON', 'w').close()
+            open('records/services.JSON', 'w').close()
 
         return flag
     
@@ -251,7 +251,7 @@ class reportManager:
         data = []
 
         try:
-            with open('memberReports.JSON', 'r') as readfile:
+            with open('records/memberReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -1
@@ -266,14 +266,14 @@ class reportManager:
         data = []
 
         try: 
-            with open('memberReports.JSON', 'r') as readfile:
+            with open('records/memberReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -2
         
         # Default option, delete all reports 
         if memberId == 0 and reportId == 0:
-            open('memberReports.JSON', 'w').close()
+            open('records/memberReports.JSON', 'w').close()
             return -1
         
         new = []
@@ -288,12 +288,12 @@ class reportManager:
         
         # Write new data back to file
         if len(new) > 0:
-            with open('memberReports.JSON', 'w') as outfile:
+            with open('records/memberReports.JSON', 'w') as outfile:
                 json.dump(new, outfile, indent=1)
 
         # Prevent writing an empty array into the file
         else:
-            open('memberReports.JSON', 'w').close()
+            open('records/memberReports.JSON', 'w').close()
 
         return flag
 
@@ -304,7 +304,7 @@ class reportManager:
         data = []
 
         try:
-            with open('providerReports.JSON', 'r') as readfile:
+            with open('records/providerReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -1
@@ -317,13 +317,13 @@ class reportManager:
         data = []
 
         try:
-            with open('providerReports.JSON', 'r') as readfile:
+            with open('records/providerReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -2
         
         if providerId == 0 and reportId == 0:
-            open('providerReports.JSON', 'w').close()
+            open('records/providerReports.JSON', 'w').close()
             return -1
         
         new = []
@@ -336,10 +336,10 @@ class reportManager:
                 new.append(entry)
 
         if len(new) > 0:
-            with open('providerReports.JSON', 'w') as outfile:
+            with open('records/providerReports.JSON', 'w') as outfile:
                 json.dump(new, outfile, indent=1)
         else:
-            open('providerReports.JSON', 'w').close()
+            open('records/providerReports.JSON', 'w').close()
 
         return flag
 
@@ -349,7 +349,7 @@ class reportManager:
         data = []
 
         try:
-            with open('payableReports.JSON', 'r') as readfile:
+            with open('records/payableReports.JSON', 'r') as readfile:
                 data = json.load(readfile)
         except:
             return -1
@@ -362,13 +362,13 @@ class reportManager:
         data = []
 
         try:
-            with open('payableReports.JSON') as readfile:
+            with open('records/payableReports.JSON') as readfile:
                 data = json.load(readfile)
         except:
             return -2
 
         if reportId == 0:
-            open('payableReports.JSON', 'w').close()
+            open('records/payableReports.JSON', 'w').close()
             return -1
         
         new = []
@@ -381,10 +381,10 @@ class reportManager:
                 new.append(entry)
         
         if len(new) > 0:
-            with open('payableReports.JSON', 'w') as outfile:
+            with open('records/payableReports.JSON', 'w') as outfile:
                 json.dump(new, outfile, indent=1)
         else:
-            open('payableReports.JSON', 'w').close()
+            open('records/payableReports.JSON', 'w').close()
 
         return flag
             
