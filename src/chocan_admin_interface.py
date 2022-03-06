@@ -51,7 +51,8 @@ class adminInterface:
                  1. Add, Modify and Remove account information
                  2. Change Provider Information
                  3. Remove Service provider
-                 4. Request Weekly Report""")
+                 4. Request Weekly Report
+                 5. Quit""")
             print (65 * "-" + "\n")
             
             choice = input("Enter choice [1-5]: ")
@@ -68,5 +69,7 @@ class adminInterface:
             elif choice == "4":
                 #Calls handler report call
                 handler.weeklyReports()
+            elif choice == "5":
+                break
             else:
                 print("Wrong selection. Enter 1-5 and try again")
