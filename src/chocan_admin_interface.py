@@ -7,15 +7,16 @@
 #   5. Request Service Directory
 # Must have home screen
 
-from chocan_admin_handler import *
-
+#from chocan_admin_handler import *
+import src.chocan_admin_handler
 
 class adminInterface:
 
     # This is the main menu for adjusting account information
     # Allows add, modify, and remove. Works with admin handler file
     def add_remove_menu(self):
-        handler = adminHandler()
+        #handler = src.adminHandler()
+        handler = src.chocan_admin_handler.adminHandler()
 
         user_input = True
 
@@ -41,7 +42,8 @@ class adminInterface:
                 print("Try Again")
 
     def admin_menu(self):
-        handler = adminHandler()
+        #handler = src.adminHandler()
+        handler = src.chocan_admin_handler.adminHandler()
         print (23 * "-" , "Admin Interface" , 23 * "-")
 
         loop = True

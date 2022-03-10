@@ -2,9 +2,11 @@
 # provider requests. This includes: login requests, provider
 # and member account updates
 
-from login_handler import *
-from report_generation_handler import *
-
+#from login_handler import *
+import src.login_handler
+#from report_generation_handler import *
+import src.report_generation_handler
+import src.account_management
 
 class adminHandler:
 
@@ -13,8 +15,8 @@ class adminHandler:
     #####
     def updateAcct(self) -> int:
 
-        acctMgr = accountManager()
-
+        #acctMgr = src.accountManager()
+        acctMgr = src.account_management.accountManager()
         kbinput = ""
         while not kbinput.isnumeric():
             kbinput = input("Enter the member ID: ")
@@ -91,7 +93,8 @@ class adminHandler:
 
     def addAcct(self) -> int:
 
-        acctmgr = accountManager()
+        #acctmgr = src.accountManager()
+        acctMgr = src.account_management.accountManager()
         name = ""
         phone = ""
         address = ""
@@ -120,7 +123,7 @@ class adminHandler:
         if type == "member":
             status = input("Member status (active/inactive): ")
             try:
-                acctmgr.makeAccount(name=name, phone=phone, address=address, username=username,
+                acctMgr.makeAccount(name=name, phone=phone, address=address, username=username,
                                     password=password, type=type, status=status, services="")
             except:
                 print("error accessing db to create account")
@@ -128,14 +131,14 @@ class adminHandler:
         if type == "provider":
             offered = input("Services Offered: ").split()
             try:
-                acctmgr.makeAccount(name=name, phone=phone, address=address, username=username,
+                acctMgr.makeAccount(name=name, phone=phone, address=address, username=username,
                                     password=password, type=type, services=offered, offered="")
             except:
                 print("error accessing db to create account")
                 return -1
         if type == "admin":
             try:
-                acctmgr.makeAccount(name=name, phone=phone, address=address, username=username,
+                acctMgr.makeAccount(name=name, phone=phone, address=address, username=username,
                                     password=password, type=type, services=offered, offered="")
             except:
                 print("error accessing db to create account")
@@ -148,7 +151,8 @@ class adminHandler:
 
     def delAcct(self) -> int:
 
-        acctMgr = accountManager()
+        #acctMgr = src.accountManager()
+        acctMgr = src.account_management.accountManager()
 
         kbinput = ""
         verify = ""
@@ -174,7 +178,8 @@ class adminHandler:
     #####
 
     def weeklyReports(self) -> int:
-        reports = reportHandler()
+        #reports = src.reportHandler()
+        reports = src.report_generation_handler.reportHandler()
         print("Generating the weekly reports...")
         # Call methods from report handler to create report files...
         reports.makePayableReport("")

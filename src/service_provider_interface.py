@@ -1,8 +1,8 @@
-from service_provider_handler import *
-
+#from service_provider_handler import *
+import src.service_provider_handler
 class serviceProviderInterface:
     def providerInterface(self, provId):
-        handler = providerHandler()
+        handler = src.service_provider_handler.providerHandler()
         serviceProviderInterface.providerMainMenu(self)
         while True:
             selection = True
