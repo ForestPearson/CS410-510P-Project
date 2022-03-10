@@ -1,13 +1,14 @@
-from report_generation_handler import *
+#from report_generation_handler import *
+import src.report_generation_handler
 from datetime import date
 import json
 
 class providerHandler:
     def displayService(self):
-        reportH = reportHandler()
+        reportH = src.report_generation_handler.reportHandler()
         reportH.displayServices()
     def makeReport(self, provId):
-        reportH = reportHandler()
+        reportH = src.report_generation_handler.reportHandler()
         today = date.today()
         memberId = int(input("Enter member ID: "))
         if(providerHandler.validate(self, memberId) == 1):
@@ -15,11 +16,11 @@ class providerHandler:
             d1 = today.strftime("%m/%d/%y")
             reportH.makeMemberReport(memberId, provId, servId, d1)
     def requestReport(self):
-        reportH = reportHandler()
+        reportH = src.report_generation_handler.reportHandler()
         memberId = int(input("Enter member ID: "))
         reportH.displayMemberReport(memberId)
     def deleteMemberReport(self):
-        reportH = reportHandler()
+        reportH = src.report_generation_handler.reportHandler()
         memberId = int(input("Enter the member ID: "))
         reportId = int(input("Enter the report ID: "))
         reportH.delMemberReports(memberId = memberId, reportId = reportId)

@@ -1,11 +1,14 @@
-from report_management import reportManager
-from account_management import accountManager
-
+#from report_management import reportManager
+import src.report_management
+#from account_management import accountManager
+import src.account_management
 class reportHandler:
   # From report_management.py to access members of reportManager class.
-  rm = reportManager
+  #rm = src.reportManager
+  rm = src.report_management
   # From account_management.py to access members of accountManager class.
-  am = accountManager
+  #am = src.accountManager
+  am = src.account_management
 
 
   ############################## Services Management ############################## 
@@ -36,7 +39,8 @@ class reportHandler:
         print("Cost: Must be a number greater than or equal to zero.")
         return -1
     
-    return self.rm.addService(self.rm, serviceName, cost)
+    #return self.rm.addService(self.rm, serviceName, cost)
+    return self.rm.reportManager.addService(self.rm, serviceName, cost)
         
 
   # Display services based on service code passed in by other controllers.
@@ -44,7 +48,8 @@ class reportHandler:
   def displayServices(self, serviceCode=0):
 
     reports = []
-    reports = self.rm.getService(self.rm)
+    #reports = self.rm.getService(self.rm)
+    reports = self.rm.reportManager.getService(self.rm)
 
     # Cannot open services.JSON or is empty.
     if reports == -1:
@@ -74,7 +79,8 @@ class reportHandler:
   # Delete service associated with passed in service code or delete all services by default.
   def delService(self, serviceCode=0):
 
-    flag = self.rm.delService(self.rm, serviceCode)
+    #flag = self.rm.delService(self.rm, serviceCode)
+    flag = self.rm.reportManager.delService(self.rm, serviceCode)
 
     if flag == -2:
       print("No services exist. Cannot delete already empty list of services.")
@@ -106,19 +112,22 @@ class reportHandler:
     accounts = self.am
 
     # Collect associated member info.
-    member = accounts.getAccountById(accounts, memberId) 
+    #member = accounts.getAccountById(accounts, memberId)
+    member = accounts.accountManager.getAccountById(accounts, memberId) 
     if member == -1 or member["type"] != "member":
       print("Invalid member ID. Cannot create member report.")
       return -1
 
     # Collect service provider info.
-    provider = accounts.getAccountById(accounts, provId)
+    #provider = accounts.getAccountById(accounts, provId)
+    provider = accounts.accountManager.getAccountById(accounts, provId)
     if provider == -1 or provider["type"] != "provider":
       print("Invalid provider ID. Cannot create member report")
       return -1
     
     # Collect service info.
-    service = reports.getService(reports, servId)
+    #service = reports.getService(reports, servId)
+    service = reports.reportManager.getService(reports, servId)
     # Display error message if specific service does not exist or none exist.
     if service == -1:
       print("No services saved. Cannot create member report.")
@@ -128,7 +137,8 @@ class reportHandler:
       return 0
 
     # Function call to the makeMemberReport function from report_management.py
-    return reports.makeMemberReport(reports, member, provider, service, date)
+    #return reports.makeMemberReport(reports, member, provider, service, date)
+    return reports.reportManager.makeMemberReport(reports, member, provider, service, date)
 
 
   # Display member reports associated with the passed member ID or report ID.
@@ -137,7 +147,8 @@ class reportHandler:
   def displayMemberReport(self, memberId=0, reportId=0):
     
     reports = []
-    reports = self.rm.getMemberReports(self.rm)
+    #reports = self.rm.getMemberReports(self.rm)
+    reports = self.rm.reportManager.getMemberReports(self.rm)
 
     #Check if member report exists.
     if reports == -1:
@@ -170,7 +181,8 @@ class reportHandler:
   #Delete all member reports associated with passed in memberID or all by default.
   def delMemberReports(self, memberId=0, reportId=0):
 
-    flag = self.rm.delMemberReports(self.rm, memberId, reportId)
+    #flag = self.rm.delMemberReports(self.rm, memberId, reportId)
+    flag = self.rm.reportManager.delMemberReports(self.rm, memberId, reportId)
 
     #No member reports saved.
     if flag == -2:
@@ -204,13 +216,15 @@ class reportHandler:
     #--------------------
   
     #Get provider info.
-    provider = self.am.getAccountById(self.am, providerId)
+    #provider = self.am.getAccountById(self.am, providerId)
+    provider = self.am.accountManager.getAccountById(self.am, providerId)
     if provider == -1:
       print("No provider found with the supplied provider ID. Cannot generate provider report.")
       return -1
 
     #Get all member reports.
-    members = self.rm.getMemberReports(self.rm)
+    #members = self.rm.getMemberReports(self.rm)
+    members = self.rm.reportManager.getMemberReports(self.rm)
     if members == -1:
       print("No saved member reports. Cannot generate provider report.")
       return -1
@@ -229,7 +243,8 @@ class reportHandler:
       print("No services by this provider saved in member reports. Cannot generate provider report.")
       return -1
     
-    return self.rm.makeProviderReport(self.rm, provider, reports, date, cost)
+    #return self.rm.makeProviderReport(self.rm, provider, reports, date, cost)
+    return self.rm.reportManager.makeProviderReport(self.rm, provider, reports, date, cost)
 
   #Display provider reports associated with the passed member ID or report ID.
   #Display all if no arguments given.
@@ -237,7 +252,9 @@ class reportHandler:
   def displayProviderReport(self, providerId=0, reportId=0):
   
     reports = []
-    reports = self.rm.getProviderReports(self.rm)
+    #reports = self.rm.getProviderReports(self.rm)
+    reports = self.rm.reportManager.getProviderReports(self.rm)
+
 
     #Check for existing provider reports.
     if reports == -1:
@@ -265,7 +282,8 @@ class reportHandler:
   #Delete all provider reports associated with passed in provider ID, report ID, or all by default.
   def delProviderReports(self, providerId=0, reportId=0):
 
-    flag = self.rm.delProviderReports(self.rm, providerId, reportId)
+    #flag = self.rm.delProviderReports(self.rm, providerId, reportId)
+    flag = self.rm.reportManager.delProviderReports(self.rm, providerId, reportId)
 
     #No provider reports exist.
     if flag == -2:
@@ -296,7 +314,8 @@ class reportHandler:
     #   Cost
     #--------------------
 
-    provReports = self.rm.getProviderReports(self.rm)
+    #provReports = self.rm.getProviderReports(self.rm)
+    provReports = self.rm.reportManager.getProviderReports(self.rm)
 
     if provReports == -1:
       print("No provider reports saved. Cannot generate Accounts Payable report.")
@@ -308,14 +327,17 @@ class reportHandler:
       repIds.append(entry["report id"])
       cost += entry["cost"]
 
-    return self.rm.makePayableReport(self.rm, date, repIds, cost)
+    #return self.rm.makePayableReport(self.rm, date, repIds, cost)
+    return self.rm.reportManager.makePayableReport(self.rm, date, repIds, cost)
+
 
   #Display payable reports associated with the passed report ID.
   #Display all if no arguments given.
   #Return fail if no match is found. 
   def displayPayableReport(self, reportId=0):
 
-    reports = self.rm.getPayableReports(self)
+    #reports = self.rm.getPayableReports(self)
+    reports = self.rm.reportManager.getPayableReports(self)
 
     #Payable report does not exist.
     if reports == -1:
@@ -347,7 +369,8 @@ class reportHandler:
   #Delete all payable reports associated with passed in memberID or all by default.
   def delPayableReport(self, reportId=0):
 
-    flag = self.rm.delPayableReports(self.rm, reportId)
+    #flag = self.rm.delPayableReports(self.rm, reportId)
+    flag = self.rm.reportManager.delPayableReports(self.rm, reportId)
 
     #No payable reports exist.
     if flag == -2:

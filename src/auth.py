@@ -1,6 +1,7 @@
 import sys
 sys.path.insert(1, '/src')
-from login_handler import *
+#from login_handler import *
+import src.login_handler
 # Authentication function. Takes in a login and password.
 # See accounts.JSON for current login credentials
 
@@ -8,7 +9,8 @@ from login_handler import *
 
 def auth():
     while True:
-        auth = loginClass()
+        #auth = src.loginClass()
+        auth = src.login_handler.loginClass()
         print (65 * "-")
         print ("""Chocoan Provider Terminal System""")
         print (65 * "-" + "\n\n\n")
