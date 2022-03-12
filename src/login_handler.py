@@ -24,6 +24,6 @@ class loginClass:
             elif account['type'] == "admin":
                 #admin = src.adminInterface()
                 admin = src.chocan_admin_interface.adminInterface()
-                admin.admin_menu()
+                admin.admin_menu(account['id'])
         else:
             return -1
