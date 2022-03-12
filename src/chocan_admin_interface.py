@@ -25,7 +25,8 @@ class adminInterface:
             print ("""
                   1. Add Account
                   2. Modify Account
-                  3. Remove Account""")
+                  3. Remove Account
+                  4. Exit""")
             print (65 * "-" + "\n")
             user_input = input("Enter choice [1-3]: ")
 
@@ -38,6 +39,9 @@ class adminInterface:
             elif user_input == "3":
                 #Delete account to json through handler
                 handler.delAcct()
+            elif user_input == "4":
+                #Break out of input loop
+                break
             else:
                 print("Try Again")
 
