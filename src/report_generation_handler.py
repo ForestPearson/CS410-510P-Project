@@ -280,10 +280,10 @@ class reportHandler:
     return 1
 
   #Delete all provider reports associated with passed in provider ID, report ID, or all by default.
-  def delProviderReports(self, providerId=0, reportId=0):
+  def delProviderReports(self, reportId=0):
 
     #flag = self.rm.delProviderReports(self.rm, providerId, reportId)
-    flag = self.rm.reportManager.delProviderReports(self.rm, providerId, reportId)
+    flag = self.rm.reportManager.delProviderReports(self.rm, reportId)
 
     #No provider reports exist.
     if flag == -2:
@@ -299,7 +299,7 @@ class reportHandler:
     
     #Match found.
     else:
-      print("Reports associated with the provided ID(s) deleted.")
+      print("Reports associated with the report ID(s) deleted.")
 
     return flag
 
