@@ -177,10 +177,10 @@ class adminHandler:
     #   AP report for total billable weekly services by provider
     #####
 
-    def weeklyReports(self) -> int:
+    def generateReports(self, admID) -> int:
         #reports = src.reportHandler()
         #reports = src.report_generation_handler.reportHandler()
-        reports = src.report_interface()
+        reports = src.report_interface.report_menu(admID)
         #print("Generating the weekly reports...")
         # Call methods from report handler to create report files...
         #reports.makePayableReport("")

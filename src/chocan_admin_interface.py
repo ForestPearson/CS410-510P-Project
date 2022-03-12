@@ -41,7 +41,7 @@ class adminInterface:
             else:
                 print("Try Again")
 
-    def admin_menu(self):
+    def admin_menu(self, admID):
         #handler = src.adminHandler()
         handler = src.chocan_admin_handler.adminHandler()
         print (23 * "-" , "Admin Interface" , 23 * "-")
@@ -70,7 +70,7 @@ class adminInterface:
                 handler.delAcct()
             elif choice == "4":
                 #Calls handler report call
-                handler.weeklyReports()
+                handler.generateReports(admID)
             elif choice == "5":
                 break
             else:
