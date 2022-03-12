@@ -29,7 +29,7 @@ class adminHandler:
 
         kbinput = "x"
 
-        while not kbinput.isnumeric() or int(kbinput) < 1 or int(kbinput) > 7:
+        while not kbinput.isnumeric() or int(kbinput) < 1 or int(kbinput) > 8:
             kbinput = input("""
                   Enter the number of the field to change:
                   1. Name
@@ -39,6 +39,7 @@ class adminHandler:
                   5. Password
                   6. Account Type
                   7. Additional Info
+                  8. Exit
                   """)
 
         # Update Member Account
@@ -84,7 +85,8 @@ class adminHandler:
                         f'Services offered:\nOld value: {acct["offered"]}, new: ')
                     acct["offered"] = input()
                     acctMgr.updateAccount(acct[1], acct)
-
+            case 8:  # Exit
+                print(f'Exit')
         return 1
 
     #####
