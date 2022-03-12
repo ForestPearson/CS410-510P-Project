@@ -56,8 +56,8 @@ class adminInterface:
             print("""
                  1. Add, Modify and Remove account information
                  2. Change Provider Information
-                 3. Remove Service provider
-                 4. Request Weekly Report
+                 3. Remove Service Provider
+                 4. Access Reports Menu Interface
                  5. Quit""")
             print (65 * "-" + "\n")
             
