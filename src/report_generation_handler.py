@@ -280,10 +280,10 @@ class reportHandler:
     return 1
 
   #Delete all provider reports associated with passed in provider ID, report ID, or all by default.
-  def delProviderReports(self, providerId=0, reportId=0):
+  def delProviderReports(self, reportId=0):
 
     #flag = self.rm.delProviderReports(self.rm, providerId, reportId)
-    flag = self.rm.reportManager.delProviderReports(self.rm, providerId, reportId)
+    flag = self.rm.reportManager.delProviderReports(self.rm, reportId)
 
     #No provider reports exist.
     if flag == -2:
@@ -299,7 +299,7 @@ class reportHandler:
     
     #Match found.
     else:
-      print("Reports associated with the provided ID(s) deleted.")
+      print("Reports associated with the report ID(s) deleted.")
 
     return flag
 
@@ -348,8 +348,8 @@ class reportHandler:
 
     #Display payable report if it exists depending on input provided.
     for entry in reports:
-      if reportId == 0 or entry["report id"] == reportId:
-
+      if entry["report id"] == reportId:
+        flag = 1
         print("\t\n~ Accounts Payable report generated on", entry["date"], "~")
         print("\tAccounts Payable report ID:", entry["report id"])
 
@@ -357,12 +357,6 @@ class reportHandler:
           self.displayProviderReport(self, reportId=id)
         
         print("\n\t~Total cost to be paid by ChocAn: $", entry["cost"], "~\n")
-
-        flag = 1
-    
-    #Report ID does not exist.
-    if flag == 0:
-      print("\nNo accounts payable report found with the supplied report ID.")
 
     return flag
 

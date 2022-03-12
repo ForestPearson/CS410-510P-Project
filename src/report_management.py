@@ -341,7 +341,7 @@ class reportManager:
     # No found match: 0
     # All provider reports deleted: -1
     # No saved provider reports: -2
-    def delProviderReports(self, providerId=0, reportId=0):
+    def delProviderReports(self, reportId=0):
 
         data = []
 
@@ -353,7 +353,7 @@ class reportManager:
             return -2
 
         # Return -1 for deleting all provider reports.  
-        if providerId == 0 and reportId == 0:
+        if reportId == 0:
             open('records/providerReports.JSON', 'w').close()
             return -1
         
@@ -362,7 +362,7 @@ class reportManager:
 
         # Copy all elements into new object, excluding deleted ones.
         for entry in data:
-            if entry["provider id"] == providerId or entry["report id"] == reportId:
+            if entry["report id"] == reportId:
                 flag = 1
             else:
                 new.append(entry)
