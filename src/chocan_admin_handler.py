@@ -5,7 +5,7 @@
 #from login_handler import *
 import src.login_handler
 #from report_generation_handler import *
-import src.report_generation_handler
+import src.report_interface
 import src.account_management
 
 class adminHandler:
@@ -179,10 +179,11 @@ class adminHandler:
 
     def weeklyReports(self) -> int:
         #reports = src.reportHandler()
-        reports = src.report_generation_handler.reportHandler()
-        print("Generating the weekly reports...")
+        #reports = src.report_generation_handler.reportHandler()
+        reports = src.report_interface()
+        #print("Generating the weekly reports...")
         # Call methods from report handler to create report files...
-        reports.makePayableReport("")
-        reports.displayPayableReport()
+        #reports.makePayableReport("")
+        #reports.displayPayableReport()
         print("Reports dispersed.")
         return 1

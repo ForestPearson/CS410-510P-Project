@@ -1,11 +1,11 @@
 #This file will display a menu interface for the type of report to be generated.
 #Types of reports can be: a list of services, payable report, member report, and provider report.
 
-from report_generation_handler import *
+from src.report_generation_handler import *
 
 
 def report_choices(self, num):
-    handler = reportHandler();
+    handler = reportHandler()
 
     if num == 1:
         print (23 * "-" , "Weekly Payable Reports Interface" , 23 * "-")
@@ -30,7 +30,8 @@ def report_choices(self, num):
         if choice == "1":
             if num == 1:
                 #Generates weekly payable report
-                print("Go to create payable weekly report")
+                print("Creating payable weekly report")
+                handler.makePayableReport()
             elif num == 2:
                 #Generates member report
                 print("Go to create member report")
