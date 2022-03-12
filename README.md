@@ -6,6 +6,9 @@ The ChocAn Data Processing Software is a component of the ChocAn software ecosys
 This project specifically is a total revision of its CS300 counterpart on the basis of reformating old cold. This is to be done with more effecient techniques, improved code documentation, and the use of testing throughout to ensure stability.
 # Build Instructions
 Ensure that python 3.10 or greater is installed then navigate to the chocon folder and run the auth.py file.
+
+To unit test make use of the unittest module with the command: ```py -m unittest tests/filename.py```
+on any of the files in the tests/ directory.
 # Revision Team Members
 * Forest Pearson
 * Brian Koehler
