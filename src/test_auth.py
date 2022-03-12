@@ -2,7 +2,7 @@
 #import sys
 #sys.path.insert(1, '/src')
 import unittest
-#import src.auth
+import src.auth
 #from auth import *
 # from login_handler import *
 # from account_management import *
