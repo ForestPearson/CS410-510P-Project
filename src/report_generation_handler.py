@@ -156,24 +156,21 @@ class reportHandler:
       return -1
 
     flag = 0
-    for entry in reports:
+    for entry in reports: 
+      
       if entry["member id"] == memberId or entry["report id"] == reportId or (memberId == 0 and reportId == 0):
-
+        
         #Only display this info once, unless displaying all entries.
         if flag == 0 or (memberId == 0 and reportId == 0):
           flag = 1
           print("\nName:", entry["member name"])
           print("Member ID:", entry["member id"])
-        
-        #Print each received service.
-        print("Service received on", entry["date"], ":", entry["service"])
-        print("Service provider:", entry["provider name"])
-        print("Cost: $", entry["cost"])
-        print("Report ID:", entry["report id"], "\n")
-    
-    if flag == 0:
-      print("\nInvalid report and/or member IDs supplied. Cannot generate member report.")
-      return 0
+          #Print each received service.
+          print("Service received on", entry["date"], ":", entry["service"])
+          print("Service provider:", entry["provider name"])
+          print("Cost: $", entry["cost"])
+          print("Report ID:", entry["report id"], "\n")
+  
     
     return 1
 
@@ -261,9 +258,10 @@ class reportHandler:
       print("No provider reports saved. Cannot display provider reports.")
       return -1
     
-    flag = 0
+    
     #Display provider report depending on input.
     for entry in reports:
+    
       if entry["provider id"] == providerId or entry["report id"] == reportId or (providerId == 0 and reportId == 0):
 
         print("\nService provider report generated on", entry["date"], "for:", entry["provider name"])
@@ -271,11 +269,6 @@ class reportHandler:
         for service in entry["services"]:
           self.displayMemberReport(self, reportId=service)
         print("Total cost of services delivered by", entry["provider name"], ": $", entry["cost"])
-        flag = 1
-
-    if flag == 0:
-      print("\nInvalid report and/or provider IDs supplied. Cannot generate provider report.")
-      return 0
     
     return 1
 
